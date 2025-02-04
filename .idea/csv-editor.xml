@@ -10,14 +10,7 @@
             </Attribute>
           </value>
         </entry>
-        <entry key="/newweather.csv">
-          <value>
-            <Attribute>
-              <option name="separator" value="," />
-            </Attribute>
-          </value>
-        </entry>
-        <entry key="/temp.csv">
+        <entry key="$USER_HOME$/Downloads/cmess.csv">
           <value>
             <Attribute>
               <option name="separator" value="," />
