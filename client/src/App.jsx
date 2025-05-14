@@ -364,7 +364,7 @@ function App() {
       </div>
 
       {/* 3D View */}
-      <div className="flex-1 h-screen bg-gradient-to-b from-gray-900 to-indigo-950 relative">
+      <div className="flex-1 min-h-screen overflow-y-scroll bg-gradient-to-b from-gray-900 to-indigo-950 relative">
         {/* Top info bar */}
         <div className="flex justify-between items-center bg-black/30 px-4 py-2 text-white text-sm">
           <div>Panel Status: <span className="text-green-400">Operational</span></div>
