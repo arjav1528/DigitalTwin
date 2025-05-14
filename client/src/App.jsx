@@ -144,25 +144,40 @@ const SolarFrame = ({
   );
 };
 
+// Replace the existing ErrorsPanel component with this enhanced version:
+
 const ErrorsPanel = ({ errors }) => {
   if (!errors || errors.length === 0) return null;
   
   return (
-    <div className="absolute bottom-4 left-4 bg-black/70 p-4 rounded-lg text-white max-w-sm">
-      <h3 className="text-red-400 font-bold mb-2 flex items-center">
-        <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+    <div className="absolute bottom-6 left-6 bg-black/80 backdrop-blur-md p-4 rounded-xl text-white max-w-sm border border-red-900/50 shadow-lg shadow-red-900/20 overflow-hidden">
+      <div className="absolute -top-8 -left-8 w-16 h-16 bg-red-500 opacity-20 rounded-full animate-pulse"></div>
+      <div className="absolute -bottom-8 -right-8 w-16 h-16 bg-red-500 opacity-10 rounded-full animate-pulse" style={{ animationDelay: "1s" }}></div>
+      
+      <h3 className="text-red-400 font-bold mb-3 flex items-center text-sm">
+        <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2 text-red-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
         </svg>
-        System Errors
+        SYSTEM ALERTS
       </h3>
-      <ul className="space-y-1 text-sm">
+      <ul className="space-y-2">
         {errors.map((error, i) => (
-          <li key={i} className="flex items-center">
-            <span className="w-2 h-2 bg-red-500 rounded-full mr-2"></span>
-            Panel {error.id} malfunction
+          <li key={i} className="flex items-start p-2 bg-red-950/40 rounded-lg border border-red-900/30">
+            <div className="w-2 h-2 bg-red-500 rounded-full mt-1.5 mr-3 animate-pulse"></div>
+            <div>
+              <div className="font-medium text-red-300">Panel #{error.id} Malfunction</div>
+              <div className="text-xs text-gray-400 mt-1">Critical error detected. Maintenance required.</div>
+            </div>
           </li>
         ))}
       </ul>
+      <button className="mt-3 w-full py-2 bg-red-700/50 hover:bg-red-700/80 rounded-lg text-xs font-medium flex items-center justify-center gap-2 border border-red-800/50 transition-colors">
+        <svg xmlns="http://www.w3.org/2000/svg" className="h-3 w-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+        </svg>
+        TROUBLESHOOT ISSUES
+      </button>
     </div>
   );
 };
@@ -283,29 +298,42 @@ function App() {
 
   // Add the time controls to your UI
   return (
-    <div className="min-h-screen max-h-screen flex">
-      {/* Sidebar */}
-      <div className="w-1/5 bg-gray-900 text-white p-6 space-y-5 overflow-y-auto shadow-lg">
-        <h1 className="text-xl font-bold text-blue-400 border-b pb-2 mb-4">Digital Twin - Solar Panel</h1>
+    <div className="min-h-screen max-h-screen flex bg-slate-950">
+      {/* Enhanced Sidebar */}
+      <div className="w-1/4 bg-gradient-to-b from-gray-900 to-gray-950 text-white p-6 space-y-5 overflow-y-auto shadow-lg border-r border-sky-900/30 relative">
+        {/* Logo and Title */}
+        <div className="flex items-center space-x-3 mb-8">
+          <div className="p-2 bg-blue-600 rounded-lg">
+            <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
+            </svg>
+          </div>
+          <h1 className="text-xl font-bold bg-gradient-to-r from-blue-400 to-cyan-300 bg-clip-text text-transparent">Solar Panel Digital Twin</h1>
+        </div>
         
-        {/* Time Controls Section */}
-        <div className="border-b border-gray-700 pb-4 mb-4">
-          <h2 className="text-md font-medium text-gray-300 mb-3">Time Simulation</h2>
-          <div className="space-y-3">
-            <div>
-              <label className="text-sm font-medium text-gray-300">Date & Time</label>
+        {/* Time Controls Section - Enhanced */}
+        <div className="rounded-xl bg-gray-800/50 p-5 border border-gray-700/50 backdrop-blur-sm mb-6">
+          <h2 className="text-md font-medium text-gray-300 mb-4 flex items-center">
+            <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 mr-2 text-cyan-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+            Time Simulation
+          </h2>
+          <div className="space-y-4">
+            <div className="relative">
+              <label className="text-sm font-medium text-gray-300 mb-2 block">Date & Time</label>
               <input
                 type="datetime-local"
                 value={date.toISOString().slice(0, 16)}
                 onChange={(e) => setDate(new Date(e.target.value))}
-                className="w-full px-3 py-2 bg-gray-800 border border-gray-700 rounded-md focus:outline-none focus:ring-1 focus:ring-blue-500 text-white mt-1"
+                className="w-full px-4 py-2.5 bg-gray-900/90 border border-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:border-transparent text-white"
               />
             </div>
             
-            <div className="flex flex-col">
-              <div className="flex justify-between">
+            <div className="space-y-2">
+              <div className="flex justify-between items-center">
                 <label className="text-sm font-medium text-gray-300">Simulation Speed</label>
-                <span className="text-xs text-blue-400">{simulationSpeed} min/sec</span>
+                <span className="text-xs px-2 py-1 bg-cyan-900/50 rounded-full text-cyan-300 font-medium">{simulationSpeed} min/sec</span>
               </div>
               <input
                 type="range"
@@ -313,65 +341,127 @@ function App() {
                 max="1440"
                 value={simulationSpeed}
                 onChange={(e) => setSimulationSpeed(parseInt(e.target.value))}
-                className="w-full mt-1"
+                className="w-full h-2 bg-gray-700 rounded-lg appearance-none cursor-pointer accent-cyan-500"
               />
+              <div className="flex justify-between text-xs text-gray-400">
+                <span>Slow</span>
+                <span>Fast</span>
+              </div>
             </div>
             
             <button
-              className={`w-full py-2 ${isSimulating ? 'bg-red-600 hover:bg-red-700' : 'bg-green-600 hover:bg-green-700'} rounded-md font-medium transition duration-300 ease-in-out`}
+              className={`w-full py-2.5 rounded-lg font-medium transition duration-300 ease-in-out flex justify-center items-center gap-2
+                ${isSimulating 
+                  ? 'bg-gradient-to-r from-red-600 to-red-700 hover:from-red-700 hover:to-red-800 text-white' 
+                  : 'bg-gradient-to-r from-emerald-500 to-cyan-500 hover:from-emerald-600 hover:to-cyan-600 text-white'}`}
               onClick={() => setIsSimulating(!isSimulating)}
             >
-              {isSimulating ? 'Stop Simulation' : 'Start Simulation'}
+              <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                {isSimulating 
+                  ? <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                  : <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z" />
+                }
+              </svg>
+              {isSimulating ? 'Pause Simulation' : 'Start Simulation'}
             </button>
           </div>
         </div>
         
-        {/* Parameters section */}
-        <h2 className="text-md font-medium text-gray-300 mb-3">Panel Parameters</h2>
-        <div className="grid gap-6">
-          {[
-            ["Frame Length", frameLength, setFrameLength, "m"],
-            ["Frame Width", frameWidth, setFrameWidth, "m"],
-            ["Frame Height", frameHeight, setFrameHeight, "m"],
-            ["Panel Length", panelLength, setPanelLength, "m"],
-            ["Panel Width", panelWidth, setPanelWidth, "m"],
-            ["Panel Height", panelHeight, setPanelHeight, "m"],
-            ["Height From Ground", heightFromGround, setHeightFromGround, "m"],
-            ["Sun Intensity", sunIntensity, setSunIntensity, "lux"],
-            ["Latitude", latitude, setLatitude, "°"],
-            ["Longitude", longitude, setLongitude, "°"]
-          ].map(([label, value, setter, unit]) => (
-            <div className="space-y-1" key={label}>
-              <div className="flex justify-between">
-                <label className="text-sm font-medium text-gray-300">{label}</label>
-                <span className="text-xs text-blue-400">{unit}</span>
+        {/* Parameters section - Enhanced */}
+        <div className="rounded-xl bg-gray-800/50 p-5 border border-gray-700/50 backdrop-blur-sm">
+          <h2 className="text-md font-medium text-gray-300 mb-4 flex items-center">
+            <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 mr-2 text-cyan-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+            </svg>
+            Panel Parameters
+          </h2>
+          
+          <div className="grid gap-4">
+            {[
+              ["Frame Length", frameLength, setFrameLength, "m"],
+              ["Frame Width", frameWidth, setFrameWidth, "m"],
+              ["Frame Height", frameHeight, setFrameHeight, "m"],
+              ["Panel Length", panelLength, setPanelLength, "m"],
+              ["Panel Width", panelWidth, setPanelWidth, "m"],
+              ["Panel Height", panelHeight, setPanelHeight, "m"],
+              ["Height From Ground", heightFromGround, setHeightFromGround, "m"],
+              ["Sun Intensity", sunIntensity, setSunIntensity, "lux"],
+              ["Latitude", latitude, setLatitude, "°"],
+              ["Longitude", longitude, setLongitude, "°"]
+            ].map(([label, value, setter, unit]) => (
+              <div className="group relative" key={label}>
+                <div className="flex justify-between mb-1.5">
+                  <label className="text-sm font-medium text-gray-300">{label}</label>
+                  <span className="text-xs px-2 py-0.5 bg-gray-700/70 rounded-full text-cyan-300 font-mono">{value}{unit}</span>
+                </div>
+                <div className="relative">
+                  <input
+                    type="number"
+                    value={value}
+                    onChange={(e) => setter(parseFloat(e.target.value) || 0)}
+                    className="w-full px-4 py-2 bg-gray-900/80 border border-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:border-transparent text-white pr-8"
+                  />
+                  <span className="absolute right-3 top-2 text-gray-400 pointer-events-none">{unit}</span>
+                </div>
               </div>
-              <input
-                type="number"
-                value={value}
-                onChange={(e) => setter(parseFloat(e.target.value) || 0)}
-                className="w-full px-3 py-2 bg-gray-800 border border-gray-700 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-white"
-              />
-            </div>
-          ))}
-        </div>
+            ))}
+          </div>
 
-        <div className="pt-4 border-t border-gray-700">
-          <button className="w-full py-2 bg-blue-600 hover:bg-blue-700 rounded-md font-medium transition duration-300 ease-in-out">
-            Reset to Default
-          </button>
+          <div className="pt-6 mt-4 border-t border-gray-700/50">
+            <button className="w-full py-2.5 rounded-lg font-medium bg-sky-600 hover:bg-sky-700 transition duration-300 ease-in-out flex justify-center items-center gap-2">
+              <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+              </svg>
+              Reset to Default
+            </button>
+          </div>
+        </div>
+        
+        {/* Footer info */}
+        <div className="text-center text-xs text-gray-500 pt-4">
+          Solar Panel Digital Twin v1.0
         </div>
       </div>
 
-      {/* 3D View */}
-      <div className="flex-1 h-screen bg-gradient-to-b from-gray-900 to-indigo-950 relative">
-        {/* Top info bar */}
-        <div className="flex justify-between items-center bg-black/30 px-4 py-2 text-white text-sm">
-          <div>Panel Status: <span className="text-green-400">Operational</span></div>
-          <div>Sun Position: ({sunPosition[0].toFixed(1)}, {sunPosition[1].toFixed(1)}, {sunPosition[2].toFixed(1)})</div>
-          <div>Time: {new Date().toLocaleTimeString()}</div>
+      {/* Enhanced 3D View */}
+      <div className="flex-1 min-h-screen overflow-y-scroll bg-gradient-to-b from-gray-900 to-indigo-950 relative">
+        {/* Enhanced Top info bar */}
+        <div className="flex justify-between items-center bg-black/40 backdrop-blur-sm px-6 py-3 text-white border-b border-sky-900/20">
+          <div className="flex items-center gap-2">
+            <div className={`w-2 h-2 rounded-full ${getErrors().length > 0 ? 'bg-red-500 animate-pulse' : 'bg-green-500'}`}></div>
+            <div>Panel Status: 
+              <span className={`ml-1 font-medium ${getErrors().length > 0 ? 'text-red-400' : 'text-green-400'}`}>
+                {getErrors().length > 0 ? 'Issues Detected' : 'Operational'}
+              </span>
+            </div>
+          </div>
+          
+          <div className="flex items-center gap-1 bg-slate-800/50 px-3 py-1 rounded-full border border-slate-700/50">
+            <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 text-amber-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
+            </svg>
+            <div className="text-xs font-mono text-slate-300">
+              ({sunPosition[0].toFixed(1)}, {sunPosition[1].toFixed(1)}, {sunPosition[2].toFixed(1)})
+            </div>
+          </div>
+          
+          <div className="flex items-center gap-2">
+            <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 text-blue-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+            <div className="font-mono text-sm">{date.toLocaleString('en-US', {
+              month: 'short',
+              day: 'numeric',
+              hour: '2-digit',
+              minute: '2-digit',
+              hour12: true
+            })}</div>
+          </div>
         </div>
-        <Canvas camera={{ position: [0, 0, 150] }}>
+        
+        {/* Canvas remains mostly the same */}
+        <Canvas camera={{ position: [0, 0, 150] }} shadows>
           <SkyBox sunPosition={sunPosition} />
           <ambientLight intensity={0.2 + Math.max(0, sunPosition[1]/300) * 0.5} />
           <Sun sunPosition={sunPosition} intensity={sunIntensity} />
@@ -391,11 +481,17 @@ function App() {
           />
         </Canvas>
         
+        {/* Enhanced Error Panel */}
         <ErrorsPanel errors={getErrors()} />
         
-        {/* Controls hint */}
-        <div className="absolute bottom-4 right-4 bg-black/40 text-white p-2 rounded text-xs">
-          Mouse: Drag to rotate | Scroll to zoom
+        {/* Enhanced Controls hint */}
+        <div className="absolute bottom-4 right-4 bg-black/60 text-white px-3 py-2 rounded-lg text-xs backdrop-blur-md flex items-center gap-2 border border-slate-700/30">
+          <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 text-blue-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+          </svg>
+          <span>
+            <span className="font-medium text-blue-300">Mouse:</span> Drag to rotate | Scroll to zoom
+          </span>
         </div>
       </div>
     </div>
